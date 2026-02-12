@@ -5,15 +5,24 @@
   --foreground: #171717;
 }
 
+/* Define custom values for Tailwind v4 */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  
+  /* Fonts */
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
+  --font-cairo: var(--font-cairo), ui-sans-serif, system-ui, sans-serif;
+
+  /* Juan Medical Brand Colors from PDF */
+  --color-juan-blue: #1e3a8a;   /* The Royal Blue */
+  --color-juan-green: #006847;  /* The Deep Green */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
+    /* Optional: Adjusted for a softer dark mode if needed */
     --background: #0a0a0a;
     --foreground: #ededed;
   }
@@ -22,5 +31,16 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans); /* Default to Geist (English) */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* AUTOMATIC FONT SWITCHING
+   If the HTML tag has dir="rtl" or lang="ar", 
+   switch the body font to Cairo immediately.
+*/
+[dir="rtl"] body, 
+[lang="ar"] body {
+  font-family: var(--font-cairo);
 }
